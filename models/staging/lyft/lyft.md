@@ -1,13 +1,21 @@
-{% docs ord_status %}
-	
-One of the following values: 
+{% docs ride_status %}
 
-| status         | definition                                       |
+One of the following values:
+
+| status | definition |
+
 |----------------|--------------------------------------------------|
-| placed         | Order placed, not yet shipped                    |
-| shipped        | Order has been shipped, not yet been delivered   |
-| completed      | Order has been received by customers             |
-| return pending | Customer indicated they want to return this item |
-| returned       | Item has been returned                           |
+
+| requested_at | Ride requested, not yet accepted  |
+
+| accepted_at | Ride accepted, driver not yet arrived |
+
+| arrived_at | Driver arrived, rider not yet picked up |
+
+| picked_up_at | Rider picked up, rider not yet dropped off |
+
+| dropped_off_at  | Rider dropped off |
+
+  
 
 {% enddocs %}

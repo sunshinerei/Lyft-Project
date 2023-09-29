@@ -24,6 +24,7 @@ sources:
               - not_null
       - name: rides_events
         description: Raw ride event data.
+        columns:
           - name: unique_id
             description: Composite key for ride events.
             tests:

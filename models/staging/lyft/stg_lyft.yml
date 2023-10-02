@@ -1,0 +1,38 @@
+version: 2
+
+models:
+  - name: stg_drivers
+    description: Staged driver data.
+    columns: 
+      - name: driver_id
+        description: The primary key for drivers.
+
+  - name: stg_rides
+    description: Staged rides data.
+    columns: 
+      - name: ride_id
+        description: The primary key for rides.
+
+      - name: driver_id
+        description: Foreign key to stg_drivers.driver_id
+
+                
+
+  - name: stg_events
+    description: Staged events data.
+    columns: 
+      - name: event
+        description: '{{ doc("ride_status") }}'
+        tests:
+          - accepted_values:
+              values:
+                - requested_at
+                - accepted_at
+                - arrived_at
+                - picked_up_at
+                - dropped_off_at
+      - name: ride_id
+        description: Foreign key to stg_rides.ride_id.
+
+
+

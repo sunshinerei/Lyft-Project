@@ -1,0 +1,33 @@
+version: 2
+
+sources:
+  - name: lyft
+    description: A clone of a Postgres application database.
+    database: lyft-project-400818
+    schema: lyft
+    tables:
+      - name: drivers
+        description: Raw driver data.
+        columns:
+          - name: drivers
+            description: Primary key for drivers.
+            tests:
+              - unique
+              - not_null
+
+      - name: rides
+        description: Raw rides data.
+        columns:
+          - name: ride_id
+            description: Primary key for rides.
+            tests:
+              - unique
+              - not_null
+
+      - name: events
+        description: Raw ride event data.
+        columns:
+          - name: ride_id
+            description: Foreign key from events.
+            tests:
+              - not_null

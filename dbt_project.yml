@@ -20,6 +20,6 @@ models:
   lyft_project:
     marts:
       core:
-        +materialized: table
+        +materialized: view
     staging:
-      +materialized: table
+      +materialized: view

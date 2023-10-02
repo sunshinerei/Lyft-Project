@@ -19,19 +19,34 @@ events as (
 driver_rides as (
 
     select
-        r.driver_id,
+        rides.driver_id,
 
-        min(e.timestamp) as first_ride_date,
-        max(e.timestamp) as most_recent_ride_date,
-        count(r.ride_id) as number_of_rides
+        min(events.timestamp) as first_ride_date,
+        max(events.timestamp) as most_recent_ride_date,
+        count(rides.ride_id) as number_of_rides
 
-    from events as e
-    join rides as r
-      on e.ride_id = r.ride_id
+    from events
+    join rides
+      on events.ride_id = rides.ride_id
 
 
     group by 1
 
+),
+
+final as (
+
+    select
+        drivers.driver_id,
+        drivers.driver_onboard_date,
+        driver_rides.first_ride_date,
+        driver_rides.most_recent_ride_date,
+        coalesce(driver_rides.number_of_rides, 0) as number_of_rides
+
+    from drivers
+    
+    left join driver_rides using (driver_id)
+
 )
 
-select * from driver_rides
+select * from final

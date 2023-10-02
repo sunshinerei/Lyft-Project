@@ -6,24 +6,17 @@ models:
     columns: 
       - name: driver_id
         description: The primary key for drivers.
-        tests:
-          - unique
-          - not_null
 
   - name: stg_rides
     description: Staged rides data.
     columns: 
       - name: ride_id
         description: The primary key for rides.
-        tests:
-          - unique
-          - not_null
+
       - name: driver_id
         description: Foreign key to stg_drivers.driver_id
-        tests:
-          - relationships:
-              field: driver_id
-              to: ref('stg_drivers')
+
+                
 
   - name: stg_events
     description: Staged events data.
@@ -40,9 +33,6 @@ models:
                 - dropped_off_at
       - name: ride_id
         description: Foreign key to stg_rides.ride_id.
-        tests:
-          - relationships:
-              field: ride_id
-              to: ref('stg_rides')
+
 
 

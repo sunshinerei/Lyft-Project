@@ -16,6 +16,18 @@ events as (
 
 ),
 
+fact_rides as (
+
+    select 
+        driver_id,
+        ROUND(SUM(amount), 2) as lifetime_value
+    
+    from {{ ref('fct_rides') }}
+    
+    GROUP BY driver_id
+
+),
+
 driver_rides as (
 
     select
@@ -41,11 +53,13 @@ final as (
         drivers.driver_onboard_date,
         driver_rides.first_ride_date,
         driver_rides.most_recent_ride_date,
-        coalesce(driver_rides.number_of_rides, 0) as number_of_rides
+        coalesce(driver_rides.number_of_rides, 0) as number_of_rides,
+        coalesce(fact_rides.lifetime_value, 0) as lifetime_value
 
     from drivers
     
     left join driver_rides using (driver_id)
+    left join fact_rides using (driver_id)
 
 )
 

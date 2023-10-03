@@ -7,7 +7,8 @@ staged as (
     select
         ride_id,
         event,
-        timestamp
+        timestamp,
+        UNIX_SECONDS(timestamp) as seconds
     from source
 )
 

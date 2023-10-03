@@ -30,7 +30,6 @@ final as (
     select
         ride_id,
         driver_id,
-        ride_id,
         ride_distance,
         ride_duration,
         ride_prime_time,

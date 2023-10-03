@@ -29,6 +29,7 @@ final as (
 
     select
         ride_id,
+        driver_id,
         (ride_distance/1609.34 * 1.15) as distance_price,
         (ride_duration/60 * 0.22) as duration_price,
         (ride_prime_time/100+1) as prime_time_multiplier,

@@ -1,3 +1,4 @@
+WITH
 rides as (
 
     select * from {{ ref('stg_rides') }}
@@ -25,16 +26,17 @@ fact_rides as (
 ride_events as (
 
     select
-        ROW_NUMBER() OVER (PARTITION BY event.ride_id 
-                           ORDER BY event.timestamp)
-                     AS event_sequence
+        events.ride_id,
+        events.event,
+        events.timestamp,
+        (-1 * (events.seconds - LEAD(events.seconds, 1) OVER
+            (PARTITION BY events.ride_id ORDER BY events.timestamp)))
+            AS event_length_seconds
     from events
     join rides
       on events.ride_id = rides.ride_id
 
-
-    group by 1
-
 )
 
-select * from ride_events
+select *
+from ride_events

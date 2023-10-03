@@ -20,7 +20,7 @@ fact_rides as (
 
     select 
         driver_id,
-        ROUND(SUM(amount), 2) as lifetime_value
+        ROUND(SUM(total), 2) as lifetime_value
     
     from {{ ref('fct_rides') }}
     

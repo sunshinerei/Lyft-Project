@@ -9,7 +9,7 @@ sources:
       - name: drivers
         description: Raw driver data.
         columns:
-          - name: drivers
+          - name: driver_id
             description: Primary key for drivers.
             tests:
               - unique

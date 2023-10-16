@@ -48,4 +48,4 @@ final as (
     from est_cost
 )
 
-select * from final
+select * from final\

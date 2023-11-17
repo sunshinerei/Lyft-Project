@@ -52,7 +52,7 @@ driver_revenue as (
         revenue/TIMESTAMP_DIFF(most_recent_ride_date, first_ride_date, day) as revenue_day,
 
         (select SUM(revenue) from driver_rides)
-        /(select COUNT(driver_id) from driver_rides) as avg_revenue_day,
+        /(select SUM(TIMESTAMP_DIFF(most_recent_ride_date, first_ride_date, day)) from driver_rides) as avg_revenue_day,
 
         (select SUM(TIMESTAMP_DIFF(most_recent_ride_date, first_ride_date, day)) from driver_rides)
         /(select COUNT(driver_id) from driver_rides) as avg_customer_lifespan
